@@ -2,7 +2,7 @@ import { ReactNode } from "react"
 
 export const Tela = ({ children }: { children: ReactNode }) => {
     return (
-        <div className="w-full h-[100vh] p-5 flex flex-col items-center justify-center">
+        <div className="w-full h-[100vh] p-5 flex flex-col items-center justify-center relative">
             {children}
         </div>
     )
