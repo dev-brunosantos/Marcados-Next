@@ -21,6 +21,7 @@ export const InputComponent = ({ isPassword, ...rest }: InputProps) => {
                 <input
                     type={type}
                     className="w-[100%] h-[100%] pl-2.5 text-[16px]"
+                    {...rest}
                 />
 
                 <button
@@ -40,6 +41,7 @@ export const InputComponent = ({ isPassword, ...rest }: InputProps) => {
             <input
                 type="text"
                 className="w-[100%] h-[100%] pl-2.5 text-[16px]"
+                {...rest}
             />
         </div>
     )
