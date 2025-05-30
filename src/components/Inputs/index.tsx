@@ -25,6 +25,7 @@ export const InputComponent = ({ isPassword, ...rest }: InputProps) => {
                 />
 
                 <button
+                    type="button"
                     className="h-[100%] p-2 flex items-center justify-center absolute top-0 right-1"
                     onClick={verSenha}
                 >
