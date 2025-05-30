@@ -3,7 +3,7 @@ import { InputComponent } from "@/src/components/Inputs";
 import { Tela, TelaContainer } from "@/src/components/Tela";
 import Link from "next/link";
 
-export default function Login() {
+export default function CadastroUsuario() {
     return (
         <Tela>
             <TelaContainer>
@@ -15,11 +15,19 @@ export default function Login() {
             <TelaContainer>
                 <InputComponent
                     isPassword={false}
+                    placeholder="Digite seu nome"
+                />
+                <InputComponent
+                    isPassword={false}
                     placeholder="Digite seu e-mail"
                 />
                 <InputComponent
                     isPassword={true}
                     placeholder="Digite sua senha"
+                />
+                <InputComponent
+                    isPassword={true}
+                    placeholder="Confirme sua senha"
                 />
             </TelaContainer>
 
@@ -27,8 +35,8 @@ export default function Login() {
                 <BtnComponent
                     titulo="Entrar"
                 />
-
-                <Link href="/cadastro/usuario">Não tem conta? Cadastre-se aqui</Link>
+                
+                <Link href="/login">Já tem conta? Faça login aqui</Link>
             </TelaContainer>
         </Tela>
     )
