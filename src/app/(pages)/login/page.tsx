@@ -1,9 +1,19 @@
+"use client"
+
 import { BtnComponent } from "@/src/components/Buttons";
 import { InputComponent } from "@/src/components/Inputs";
 import { Tela, TelaContainer } from "@/src/components/Tela";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+
+    const route = useRouter()
+
+    function login() {
+        return route.push('/home')
+    }
+
     return (
         <Tela>
             <TelaContainer>
@@ -26,6 +36,7 @@ export default function Login() {
             <TelaContainer>
                 <BtnComponent
                     titulo="Entrar"
+                    onClick={login}
                 />
 
                 <Link href="/cadastro/usuario">Não tem conta? Cadastre-se aqui</Link>
