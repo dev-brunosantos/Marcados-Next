@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SelectNaipe } from "./SelectComponent";
 import { Formulario } from "./Formulario";
+import { api } from "@/src/configs/axios";
 
 interface CargoProps {
     id: number;
@@ -23,11 +24,13 @@ export default function CadastroUsuario(naipe: string) {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [confirmacaoSenha, setConfirmacaoSenha] = useState('')
+    const [naipeEscolhido, setNaipeEscolhido] = useState('')
 
     useEffect(() => {
         async function buscaDados() {
-            var response = await fetch('http://localhost:9000/cargos')
-            var dados = await response.json()
+            // var response = await fetch('http://192.168.0.176:9000/cargos')
+            var response = await api.get('/cargos')
+            var dados = await response.data
 
             if (!dados) {
                 throw new Error("Erro")
@@ -58,11 +61,14 @@ export default function CadastroUsuario(naipe: string) {
             </TelaContainer>
 
             <TelaContainer>
-                <select value={cargo} onChange={(e) => setCargo(e.target.value)}>
-                    <option value="">Escolha seu cargo</option>
+                <select
+                    className="w-[100%] h-[54px] mt-2 mb-2 border rounded-xl flex items-center justify-center"
+                    value={cargo} onChange={(e) => setCargo(e.target.value)}
+                >
+                    <option className="w-full h-full text-center" value="">Escolha seu cargo</option>
                     {
                         cargos.map(card => (
-                            <option key={card.id} value={card.cargo}>
+                            <option className="w-[50%] text-center" key={card.id} value={card.cargo}>
                                 {card.cargo}
                             </option>
                         ))
@@ -70,12 +76,22 @@ export default function CadastroUsuario(naipe: string) {
                 </select>
                 {
                     cargo == "Vocal" && (
-                        <SelectNaipe naipe="Vozes" placeholder="Escolha seu Naipe" />
+                        <SelectNaipe
+                            naipe="Vozes"
+                            placeholder="Escolha seu Naipe"
+                            naipeEscolhido={naipeEscolhido}
+                            setNaipeEscolhido={setNaipeEscolhido}
+                        />
                     )
                 }
                 {
                     cargo == "Musico" && (
-                        <SelectNaipe naipe="Instrumentos" placeholder="Escolha seu instrumento" />
+                        <SelectNaipe
+                            naipe="Instrumentos"
+                            placeholder="Escolha seu instrumento"
+                            naipeEscolhido={naipeEscolhido}
+                            setNaipeEscolhido={setNaipeEscolhido}
+                        />
                     )
                 }
             </TelaContainer>
@@ -84,14 +100,15 @@ export default function CadastroUsuario(naipe: string) {
                 <BtnComponent
                     titulo="Cadastrar"
                     onClick={() => {
-                        if(nome.trim() == "" || email.trim() == "" || senha.trim() == "") {
+                        if (nome.trim() == "" || email.trim() == "" || senha.trim() == "") {
                             return alert("Todos os campos devem ser preenchidos")
                         }
 
                         if (confirmacaoSenha != senha) {
                             return alert("As senhas não são iguais.")
                         }
-                        console.log(`${nome}, ${email}, ${senha}`)
+                        console.log(`${nome}, ${email}, ${senha}, ${cargo}, ${naipeEscolhido}`)
+                        alert(`${nome}, ${email}, ${senha}, ${cargo}, ${naipeEscolhido}`)
                     }}
                 />
 
